@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B51CB1991E2B33DF00799670 /* BCMDoublyLinkedList+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51CB1981E2B33DF00799670 /* BCMDoublyLinkedList+Sorting.swift */; };
 		B52ABE1A1CCA24E200C596F4 /* BCMDoublyLinkedList.h in Headers */ = {isa = PBXBuildFile; fileRef = B52ABE191CCA24E200C596F4 /* BCMDoublyLinkedList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B52ABE211CCA24E200C596F4 /* BCMDoublyLinkedList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B52ABE161CCA24E200C596F4 /* BCMDoublyLinkedList.framework */; };
 		B52ABE261CCA24E200C596F4 /* BCMDoublyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52ABE251CCA24E200C596F4 /* BCMDoublyLinkedListTests.swift */; };
+		B52ABE361CCA257300C596F4 /* ListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52ABE351CCA257300C596F4 /* ListNode.swift */; };
+		B52ABE391CCA276200C596F4 /* BCMDoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52ABE381CCA276200C596F4 /* BCMDoublyLinkedList.swift */; };
+		B52FCD131CD755A800E8D2E0 /* ListNode+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FCD121CD755A800E8D2E0 /* ListNode+Equatable.swift */; };
+		B52FCD151CD76ED700E8D2E0 /* BCMDoublyLinkedList+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FCD141CD76ED700E8D2E0 /* BCMDoublyLinkedList+Equatable.swift */; };
+		B5891DBE1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5891DBD1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift */; };
+		B5891DC21E29E667001E2F14 /* ListNode+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5891DC11E29E667001E2F14 /* ListNode+Operators.swift */; };
+		B5D695881CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D695871CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +31,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B51CB1981E2B33DF00799670 /* BCMDoublyLinkedList+Sorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BCMDoublyLinkedList+Sorting.swift"; sourceTree = "<group>"; };
 		B52ABE161CCA24E200C596F4 /* BCMDoublyLinkedList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BCMDoublyLinkedList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52ABE191CCA24E200C596F4 /* BCMDoublyLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCMDoublyLinkedList.h; sourceTree = "<group>"; };
 		B52ABE1B1CCA24E200C596F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B52ABE201CCA24E200C596F4 /* BCMDoublyLinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BCMDoublyLinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52ABE251CCA24E200C596F4 /* BCMDoublyLinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCMDoublyLinkedListTests.swift; sourceTree = "<group>"; };
 		B52ABE271CCA24E200C596F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B52ABE351CCA257300C596F4 /* ListNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListNode.swift; path = List/ListNode.swift; sourceTree = "<group>"; };
+		B52ABE381CCA276200C596F4 /* BCMDoublyLinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCMDoublyLinkedList.swift; sourceTree = "<group>"; };
+		B52FCD121CD755A800E8D2E0 /* ListNode+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ListNode+Equatable.swift"; sourceTree = "<group>"; };
+		B52FCD141CD76ED700E8D2E0 /* BCMDoublyLinkedList+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BCMDoublyLinkedList+Equatable.swift"; sourceTree = "<group>"; };
+		B5891DBD1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BCMDoublyLinkedList+Error.swift"; sourceTree = "<group>"; };
+		B5891DC11E29E667001E2F14 /* ListNode+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ListNode+Operators.swift"; path = "List/ListNode+Operators.swift"; sourceTree = "<group>"; };
+		B5D695871CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BCMDoublyLinkedList+Sequence.swift"; path = "List/BCMDoublyLinkedList+Sequence.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +89,7 @@
 			children = (
 				B52ABE191CCA24E200C596F4 /* BCMDoublyLinkedList.h */,
 				B52ABE1B1CCA24E200C596F4 /* Info.plist */,
+				B52ABE371CCA257A00C596F4 /* List */,
 			);
 			path = BCMDoublyLinkedList;
 			sourceTree = "<group>";
@@ -84,6 +101,29 @@
 				B52ABE271CCA24E200C596F4 /* Info.plist */,
 			);
 			path = BCMDoublyLinkedListTests;
+			sourceTree = "<group>";
+		};
+		B52ABE371CCA257A00C596F4 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				B52FCD111CD7559800E8D2E0 /* Node */,
+				B52ABE381CCA276200C596F4 /* BCMDoublyLinkedList.swift */,
+				B5D695871CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift */,
+				B52FCD141CD76ED700E8D2E0 /* BCMDoublyLinkedList+Equatable.swift */,
+				B5891DBD1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift */,
+				B51CB1981E2B33DF00799670 /* BCMDoublyLinkedList+Sorting.swift */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		B52FCD111CD7559800E8D2E0 /* Node */ = {
+			isa = PBXGroup;
+			children = (
+				B52ABE351CCA257300C596F4 /* ListNode.swift */,
+				B52FCD121CD755A800E8D2E0 /* ListNode+Equatable.swift */,
+				B5891DC11E29E667001E2F14 /* ListNode+Operators.swift */,
+			);
+			name = Node;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,9 +188,12 @@
 				TargetAttributes = {
 					B52ABE151CCA24E200C596F4 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 4B35ZUZXEQ;
+						LastSwiftMigration = 0820;
 					};
 					B52ABE1F1CCA24E200C596F4 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -194,6 +237,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B52ABE391CCA276200C596F4 /* BCMDoublyLinkedList.swift in Sources */,
+				B52FCD151CD76ED700E8D2E0 /* BCMDoublyLinkedList+Equatable.swift in Sources */,
+				B5D695881CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift in Sources */,
+				B51CB1991E2B33DF00799670 /* BCMDoublyLinkedList+Sorting.swift in Sources */,
+				B5891DC21E29E667001E2F14 /* ListNode+Operators.swift in Sources */,
+				B52ABE361CCA257300C596F4 /* ListNode.swift in Sources */,
+				B52FCD131CD755A800E8D2E0 /* ListNode+Equatable.swift in Sources */,
+				B5891DBE1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +359,8 @@
 		B52ABE2B1CCA24E200C596F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +371,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.segfaultftw.BCMDoublyLinkedList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		B52ABE2C1CCA24E200C596F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -334,6 +391,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.segfaultftw.BCMDoublyLinkedList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -344,6 +402,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segfaultftw.BCMDoublyLinkedListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -354,6 +413,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segfaultftw.BCMDoublyLinkedListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -376,6 +436,7 @@
 				B52ABE2C1CCA24E200C596F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B52ABE2D1CCA24E200C596F4 /* Build configuration list for PBXNativeTarget "BCMDoublyLinkedListTests" */ = {
 			isa = XCConfigurationList;
@@ -384,6 +445,7 @@
 				B52ABE2F1CCA24E200C596F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
