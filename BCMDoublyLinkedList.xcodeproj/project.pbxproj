@@ -18,6 +18,7 @@
 		B5891DBE1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5891DBD1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift */; };
 		B5891DC21E29E667001E2F14 /* ListNode+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5891DC11E29E667001E2F14 /* ListNode+Operators.swift */; };
 		B5D695881CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D695871CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift */; };
+		B5F2FD30229BE64400691154 /* SortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2FD2F229BE64400691154 /* SortTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		B5891DBD1E29BF0B001E2F14 /* BCMDoublyLinkedList+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BCMDoublyLinkedList+Error.swift"; sourceTree = "<group>"; };
 		B5891DC11E29E667001E2F14 /* ListNode+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ListNode+Operators.swift"; path = "List/ListNode+Operators.swift"; sourceTree = "<group>"; };
 		B5D695871CD377AA007A57CD /* BCMDoublyLinkedList+Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BCMDoublyLinkedList+Sequence.swift"; path = "List/BCMDoublyLinkedList+Sequence.swift"; sourceTree = "<group>"; };
+		B5F2FD2F229BE64400691154 /* SortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				B52ABE251CCA24E200C596F4 /* BCMDoublyLinkedListTests.swift */,
+				B5F2FD2F229BE64400691154 /* SortTests.swift */,
 				B52ABE271CCA24E200C596F4 /* Info.plist */,
 			);
 			path = BCMDoublyLinkedListTests;
@@ -189,11 +192,11 @@
 					B52ABE151CCA24E200C596F4 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 4B35ZUZXEQ;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1020;
 					};
 					B52ABE1F1CCA24E200C596F4 = {
 						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -202,6 +205,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = B52ABE0C1CCA24E200C596F4;
@@ -253,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B52ABE261CCA24E200C596F4 /* BCMDoublyLinkedListTests.swift in Sources */,
+				B5F2FD30229BE64400691154 /* SortTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +377,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -391,7 +396,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.segfaultftw.BCMDoublyLinkedList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -402,7 +407,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segfaultftw.BCMDoublyLinkedListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -413,7 +418,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segfaultftw.BCMDoublyLinkedListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

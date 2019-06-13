@@ -8,18 +8,10 @@
 
 import Foundation
 
-public final class ListNode<T> {
-    var object: T
-    internal(set) var next: ListNode<T>? = nil {
-        willSet {
-            next?.previous = self
-        }
-    }
-    internal(set) var previous: ListNode<T>? = nil {
-        willSet {
-            previous?.next = self
-        }
-    }
+public final class ListNode<T>: CustomStringConvertible {
+    public var object: T
+    var next: ListNode<T>? = nil
+    var previous: ListNode<T>? = nil
     
     init(object anObject: T) {
         object = anObject
@@ -28,5 +20,9 @@ public final class ListNode<T> {
     deinit {
         next = nil
         previous = nil
+    }
+    
+    public var description: String {
+        return "\(previous?.object) <-- \(object) --> \(next?.object)"
     }
 }

@@ -8,31 +8,10 @@
 
 import Foundation
 
-public final class BCMDoublyLinkedList<T> {
-    fileprivate(set) var count: UInt = 0 {
-        didSet {
-            lastRequestedNode = head
-            lastRequestedIndex = 0
-        }
-    }
-    
-    fileprivate(set) var head: ListNode<T>? {
-        willSet {
-            newValue?.next = head
-        }
-    }
-    
-    fileprivate(set) var tail: ListNode<T>? {
-        get {
-            return head?.previous
-        }
-        set {
-            head?.previous = newValue
-        }
-    }
-    
-    private var lastRequestedIndex: UInt = 0
-    private weak var lastRequestedNode: ListNode<T>?
+public final class BCMDoublyLinkedList<T>: CustomStringConvertible {
+    private(set) var count: UInt = 0
+    private(set) var head: ListNode<T>? = nil
+    private(set) var tail: ListNode<T>? = nil
     
     public convenience init(fromList: BCMDoublyLinkedList<T>){
         self.init()
@@ -43,9 +22,20 @@ public final class BCMDoublyLinkedList<T> {
         self.init()
         addObjectsFrom(array: fromArray)
     }
+
     
     deinit {
         emptyList()
+    }
+    
+    public var description: String {
+        var desc = "["
+        for val in self {
+            desc.append("\(val), ")
+        }
+        desc.append("]")
+        
+        return desc
     }
     
     // MARK: - Inserting
@@ -55,12 +45,21 @@ public final class BCMDoublyLinkedList<T> {
     }
     
     public func pushFront(node nodeToInsert: ListNode<T>) {
-        head = nodeToInsert
-        count = count + 1
+        if head == nil {
+            head = nodeToInsert
+        }
         
         if tail == nil {
             tail = head
         }
+        
+        nodeToInsert.next = head
+        nodeToInsert.previous = head?.previous
+        head?.previous = nodeToInsert
+        head = nodeToInsert
+        tail?.next = head
+        
+        count = count + 1
     }
     
     public func pushBack(object: T) {
@@ -69,12 +68,22 @@ public final class BCMDoublyLinkedList<T> {
     }
     
     public func pushBack(node nodeToInsert: ListNode<T>) {
-        tail = nodeToInsert
-        count = count + 1
+        if tail == nil {
+            tail = nodeToInsert
+        }
         
         if head == nil {
             head = tail
         }
+        
+        
+        nodeToInsert.previous = tail
+        nodeToInsert.next = tail?.next
+        tail?.next = nodeToInsert
+        tail = nodeToInsert
+        head?.previous = tail
+    
+        count = count + 1
     }
     
     public func addObjectsFrom(list: BCMDoublyLinkedList<T>) {
@@ -122,7 +131,10 @@ public final class BCMDoublyLinkedList<T> {
     }
     
     fileprivate func insert(node: ListNode<T>, beforeNode: ListNode<T>) {
+        beforeNode.previous?.next = node
+        node.previous = beforeNode.previous
         node.next = beforeNode
+        beforeNode.previous = node
         count = count + 1
     }
     
@@ -145,37 +157,16 @@ public final class BCMDoublyLinkedList<T> {
     }
     
     // MARK: - Querying
-    subscript (index: UInt) -> T? {
+    subscript (index: UInt) -> T {
         get {
-            do {
-                return try objectAt(index: index)
-            }
-            catch BCMDoublyLinkedListError.indexOutOfBounds(let askedIndex) {
-                print("Index: \(askedIndex) is out of bounds. Current Count: \(count)")
-                return nil
-            }
-            catch {
-                return nil
-            }
+            return try! objectAt(index: index)
         }
         set {
-            guard let newValue = newValue else {
-                return
-            }
-            
-            do {
-                try insert(object: newValue, atIndex: index)
-            }
-            catch BCMDoublyLinkedListError.indexOutOfBounds(let askedIndex) {
-                print("Index: \(askedIndex) is out of bounds. Current Count: \(count)")
-            }
-            catch {
-                return
-            }
+            try! insert(object: newValue, atIndex: index)
         }
     }
     
-    public func objectAt(index: UInt) throws -> T? {
+    public func objectAt(index: UInt) throws -> T {
         let node = try nodeAt(index: index)
         return node.object
     }
@@ -185,42 +176,28 @@ public final class BCMDoublyLinkedList<T> {
             throw BCMDoublyLinkedListError.indexOutOfBounds(outIndex: index)
         }
         
-        if let head = head, index == 0 {
-            return head
-        }
-        else if let tail = tail, index == (count - 1) {
-            return tail
-        }
-        else if let lastRequestedNode = lastRequestedNode, index == lastRequestedIndex {
-            return lastRequestedNode
-            
-        } else if let lastRequestedNode = lastRequestedNode?.previous, index == (lastRequestedIndex - 1) {
-            self.lastRequestedNode = lastRequestedNode
-            return lastRequestedNode
-        }
-        else if let lastRequestedNode = lastRequestedNode?.next, index == (lastRequestedIndex + 1) {
-            self.lastRequestedNode = lastRequestedNode
-            return lastRequestedNode
+        var node = head!
+        var i: UInt = 0
+        while i < index {
+            node = node.next!
+            i = i + 1
         }
         
-        let add = index > lastRequestedIndex
-        var nodeToReturn: ListNode<T>?
-        if add {
-            let traverse = index - lastRequestedIndex
-            nodeToReturn = lastRequestedNode! + traverse
-        }
-        else {
-            let traverse = lastRequestedIndex  - index
-            nodeToReturn = lastRequestedNode! - traverse
-        }
-        
-        lastRequestedIndex = index
-        lastRequestedNode = nodeToReturn
-        
-        return nodeToReturn!
+        return node
     }
     
-    public func subList(fromRange range: CountableClosedRange<UInt>) -> BCMDoublyLinkedList<T> {
+    
+    public func subList(fromRange range: ClosedRange<UInt>) throws -> BCMDoublyLinkedList<T> {
+        let subList = BCMDoublyLinkedList<T>()
         
+        var index = range.lowerBound
+        var node = try nodeAt(index: index)
+        while(index <= range.upperBound && index < count) {
+            subList.pushBack(object: node.object)
+            node = node.next!
+            index = index + 1
+        }
+        
+        return subList
     }
 }
