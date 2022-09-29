@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension BCMDoublyLinkedList: Equatable {
-    public static func ==<T>(lhs: BCMDoublyLinkedList<T>, rhs: BCMDoublyLinkedList<T>) -> Bool {
+extension LinkedList: Equatable {
+    public static func ==<T>(lhs: LinkedList<T>, rhs: LinkedList<T>) -> Bool {
         if Unmanaged.passUnretained(lhs).toOpaque() != Unmanaged.passUnretained(rhs).toOpaque() {
             return false
         }
@@ -34,7 +34,7 @@ extension BCMDoublyLinkedList: Equatable {
         return true
     }
     
-    public static func !=<T>(lhs: BCMDoublyLinkedList<T>, rhs: BCMDoublyLinkedList<T>) -> Bool {
+    public static func !=<T>(lhs: LinkedList<T>, rhs: LinkedList<T>) -> Bool {
         return !(lhs == rhs)
     }
 }

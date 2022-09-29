@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension BCMDoublyLinkedList: Sequence {
+extension LinkedList: Sequence {
     public func makeIterator() -> AnyIterator<T> {
-        var node: ListNode<T>? = head
+        var node: Node<T>? = head
         var visitedHead = false
         
         return AnyIterator({ () -> T? in

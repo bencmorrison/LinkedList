@@ -8,28 +8,28 @@
 
 import Foundation
 
-extension ListNode: Equatable {
+extension Node: Equatable {
     func isEqual(_ anObject: AnyObject?) -> Bool {
-        guard let anObject = anObject as? ListNode else {
+        guard let anObject = anObject as? Node else {
             return false
         }
         
         return self == anObject
     }
     
-    public static func ==<T>(lhs: ListNode<T>, rhs: ListNode<T>) -> Bool {
+    public static func ==<T>(lhs: Node<T>, rhs: Node<T>) -> Bool {
         return Unmanaged.passUnretained(lhs).toOpaque() == Unmanaged.passUnretained(rhs).toOpaque()
     }
     
-    public static func !=<T>(lhs: ListNode<T>, rhs: ListNode<T>) -> Bool {
+    public static func !=<T>(lhs: Node<T>, rhs: Node<T>) -> Bool {
         return Unmanaged.passUnretained(lhs).toOpaque() != Unmanaged.passUnretained(rhs).toOpaque()
     }
     
-    public static func ==<T: Equatable>(lhs: ListNode<T>, rhs: ListNode<T>) -> Bool {
+    public static func ==<T: Equatable>(lhs: Node<T>, rhs: Node<T>) -> Bool {
         return lhs.object == rhs.object
     }
     
-    public static func !=<T: Equatable>(lhs: ListNode<T>, rhs: ListNode<T>) -> Bool {
+    public static func !=<T: Equatable>(lhs: Node<T>, rhs: Node<T>) -> Bool {
         return lhs.object != rhs.object
     }
 }

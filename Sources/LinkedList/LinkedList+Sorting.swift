@@ -8,14 +8,14 @@
 
 import Foundation
 
-extension BCMDoublyLinkedList {
+extension LinkedList {
     public typealias SortBlock = (_ left: T, _ right: T) -> Bool
     
-    public func sort(by comparison: SortBlock) throws -> BCMDoublyLinkedList<T> {
+    public func sort(by comparison: SortBlock) throws -> LinkedList<T> {
         return _sort(list: self, by: comparison)
     }
     
-    private func _sort(list: BCMDoublyLinkedList<T>, by comparison: SortBlock) -> BCMDoublyLinkedList<T> {
+    private func _sort(list: LinkedList<T>, by comparison: SortBlock) -> LinkedList<T> {
         guard list.count > 1 else { return list }
         
         let middle: UInt = list.count / 2
@@ -28,8 +28,8 @@ extension BCMDoublyLinkedList {
         return merge(left: left, right: right, comparison: comparison)
     }
     
-    private func merge(left: BCMDoublyLinkedList<T>, right: BCMDoublyLinkedList<T>, comparison: SortBlock) -> BCMDoublyLinkedList<T> {
-        let merged: BCMDoublyLinkedList<T> = BCMDoublyLinkedList<T>()
+    private func merge(left: LinkedList<T>, right: LinkedList<T>, comparison: SortBlock) -> LinkedList<T> {
+        let merged: LinkedList<T> = LinkedList<T>()
     
         var leftNode = left.head!
         var rightNode = right.head!

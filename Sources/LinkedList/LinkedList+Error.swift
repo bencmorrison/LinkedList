@@ -8,10 +8,10 @@
 
 import Foundation
 
-public enum BCMDoublyLinkedListError: Error {
+public enum LinkedListError: Error {
     case indexOutOfBounds(outIndex: UInt)
 }
 
-extension BCMDoublyLinkedList {
+extension LinkedList {
     
 }

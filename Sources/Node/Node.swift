@@ -8,10 +8,10 @@
 
 import Foundation
 
-public final class ListNode<T>: CustomStringConvertible {
+public class Node<T>: CustomStringConvertible {
     public var object: T
-    var next: ListNode<T>? = nil
-    var previous: ListNode<T>? = nil
+    var next: Node<T>? = nil
+    var previous: Node<T>? = nil
     
     init(object anObject: T) {
         object = anObject
@@ -19,10 +19,9 @@ public final class ListNode<T>: CustomStringConvertible {
     
     deinit {
         next = nil
-        previous = nil
     }
     
     public var description: String {
-        return "\(previous?.object) <-- \(object) --> \(next?.object)"
+        return "\(String(describing: previous?.object)) <-- \(object) --> \(String(describing: next?.object))"
     }
 }
