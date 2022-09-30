@@ -7,15 +7,15 @@
 //
 
 import XCTest
-@testable import BCMDoublyLinkedList
+@testable import LinkedList
 
 class SortTests: XCTestCase {
     let unsortedArray: [Int] = [4, 3244, 445, 958, 24783, 778, 1, 84]
     var sortedArray: [Int]!
-    var unsortedList: BCMDoublyLinkedList<Int>!
+    var unsortedList: LinkedList<Int>!
 
     override func setUp() {
-        unsortedList = BCMDoublyLinkedList<Int>(fromArray: unsortedArray)
+        unsortedList = LinkedList<Int>(fromArray: unsortedArray)
     }
 
     override func tearDown() {

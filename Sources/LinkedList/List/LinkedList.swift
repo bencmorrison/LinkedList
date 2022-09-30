@@ -105,20 +105,22 @@ public final class LinkedList<T>: CustomStringConvertible {
         pushBack(node: node)
     }
     
-    public func insert(object: T, atIndex: UInt) throws {
+    public func insert(object: T, atIndex: UInt) {
         let nodeToInsert = Node(object: object)
-        try insert(node: nodeToInsert, atIndex: atIndex)
+        insert(node: nodeToInsert, atIndex: atIndex)
     }
     
-    public func insert(node: Node<T>, atIndex: UInt) throws {
-        if atIndex == 0 {
+    public func insert(node: Node<T>, atIndex index: UInt) {
+        assert(indexIsValid(index, operation: .insert))
+        
+        if index == 0 {
             pushFront(node: node)
         }
-        else if atIndex == count {
+        else if index == count {
             pushBack(node: node)
         }
         else {
-            let beforeNode = try nodeAt(index: atIndex)
+            let beforeNode = nodeAt(index: index)
             insert(node: node, beforeNode: beforeNode)
         }
     }
@@ -158,22 +160,28 @@ public final class LinkedList<T>: CustomStringConvertible {
     // MARK: - Querying
     subscript (index: UInt) -> T {
         get {
-            return try! objectAt(index: index)
+            assert(
+                indexIsValid(index),
+                LinkedListError.indexOutOfBounds(outIndex: index).localizedDescription
+            )
+            return objectAt(index: index)
         }
         set {
-            try! insert(object: newValue, atIndex: index)
+            assert(
+                indexIsValid(index, operation: .insert),
+                LinkedListError.indexOutOfBounds(outIndex: index).localizedDescription
+            )
+            insert(object: newValue, atIndex: index)
         }
     }
     
-    public func objectAt(index: UInt) throws -> T {
-        let node = try nodeAt(index: index)
+    public func objectAt(index: UInt) -> T {
+        let node = nodeAt(index: index)
         return node.object
     }
     
-    public func nodeAt(index: UInt) throws -> Node<T> {
-        if index >= count {
-            throw BCMDoublyLinkedListError.indexOutOfBounds(outIndex: index)
-        }
+    public func nodeAt(index: UInt) -> Node<T> {
+        assert(indexIsValid(index))
         
         var node = head!
         var i: UInt = 0
@@ -185,12 +193,11 @@ public final class LinkedList<T>: CustomStringConvertible {
         return node
     }
     
-    
     public func subList(fromRange range: ClosedRange<UInt>) throws -> LinkedList<T> {
         let subList = LinkedList<T>()
         
         var index = range.lowerBound
-        var node = try nodeAt(index: index)
+        var node = nodeAt(index: index)
         while(index <= range.upperBound && index < count) {
             subList.pushBack(object: node.object)
             node = node.next!
@@ -198,5 +205,20 @@ public final class LinkedList<T>: CustomStringConvertible {
         }
         
         return subList
+    }
+    
+    
+    private enum Operation {
+        case query
+        case insert
+        case remove
+    }
+    
+    private func indexIsValid(_ index: UInt, operation: Operation = .query) -> Bool {
+        switch operation {
+        case .query: return index < count
+        case .insert: return index < count + 1
+        case .remove: return index < count
+        }
     }
 }

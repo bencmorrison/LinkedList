@@ -19,6 +19,7 @@ public class Node<T>: CustomStringConvertible {
     
     deinit {
         next = nil
+        previous = nil
     }
     
     public var description: String {
