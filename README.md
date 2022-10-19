@@ -1,4 +1,3 @@
-# BCMDoublyLinkedList
-`BCMDoublyLinkedList` is the Swift equivalent, and surpassing of `BMDoublyLinkedList` which is Obj-C.
+# LinkedList
 
-This project is here for me to implment various things from Swift to gain an understanding of how they work. What is a better place to build skills than creating a data structure in a new language?
+This is just a random class that I occasionally play with and update with various things. It can be used but not sure why anyone would want to use a LinkedList these days.

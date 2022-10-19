@@ -9,7 +9,7 @@
 import XCTest
 @testable import LinkedList
 
-class SortTests: XCTestCase {
+class ListSortTests: XCTestCase {
     let unsortedArray: [Int] = [4, 3244, 445, 958, 24783, 778, 1, 84]
     var sortedArray: [Int]!
     var unsortedList: LinkedList<Int>!
@@ -24,7 +24,7 @@ class SortTests: XCTestCase {
 
     func testSortingAsc() {
         sortedArray = unsortedArray.sorted { $0 < $1 }
-        let sortedList = try! unsortedList.sort { $0 < $1 }
+        let sortedList = try! unsortedList.sorted { $0 < $1 }
         
         var previous = 0
         for value in sortedList {
@@ -35,7 +35,7 @@ class SortTests: XCTestCase {
     
     func testSortingDes() {
         sortedArray = unsortedArray.sorted { $0 > $1 }
-        let sortedList = try! unsortedList.sort { $0 > $1 }
+        let sortedList = try! unsortedList.sorted { $0 > $1 }
         
         var previous:Int = Int.max
         for value in sortedList {

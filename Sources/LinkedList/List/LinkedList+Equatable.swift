@@ -8,33 +8,26 @@
 
 import Foundation
 
-extension LinkedList: Equatable {
-    public static func ==<T>(lhs: LinkedList<T>, rhs: LinkedList<T>) -> Bool {
-        if Unmanaged.passUnretained(lhs).toOpaque() != Unmanaged.passUnretained(rhs).toOpaque() {
-            return false
-        }
+extension LinkedList: Equatable where T: Equatable {
+    public static func ==(lhs: LinkedList<T>, rhs: LinkedList<T>) -> Bool {
+        guard lhs.count == rhs.count else { return false }
+        // Bypass having no nodes in the list we can force unwrap now
+        guard lhs.count > 0 else { return true }
         
-        if lhs.count != rhs.count {
-            return false
-        }
-        
-        var lNode = lhs.head
-        var rNode = rhs.head
+        // There should be no nils beyond this point
+        guard var lNode = lhs.head else { return false }
+        guard var rNode = rhs.head else { return false }
         
         repeat {
-            if lNode != rNode {
-                return false
-            }
+            guard lNode.isSimilarTo(rNode) else { return false }
+            guard let lNext = lNode.next, let rNext = rNode.next else { return false }
+            lNode = lNext
+            rNode = rNext
             
-            lNode = lNode?.next
-            rNode = rNode?.next
-            
-        } while (lNode != lhs.head && rNode != rhs.head)
+        } while (!lNode.isNode(lhs.head) && !rNode.isNode(rhs.head))
+        
+        guard lNode.isNode(lhs.head) && rNode.isNode(rhs.head) else { return false }
         
         return true
-    }
-    
-    public static func !=<T>(lhs: LinkedList<T>, rhs: LinkedList<T>) -> Bool {
-        return !(lhs == rhs)
     }
 }

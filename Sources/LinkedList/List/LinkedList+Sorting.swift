@@ -11,7 +11,7 @@ import Foundation
 extension LinkedList {
     public typealias SortBlock = (_ left: T, _ right: T) -> Bool
     
-    public func sort(by comparison: SortBlock) throws -> LinkedList<T> {
+    public func sorted(by comparison: SortBlock) throws -> LinkedList<T> {
         return _sort(list: self, by: comparison)
     }
     

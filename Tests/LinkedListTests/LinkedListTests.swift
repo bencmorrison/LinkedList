@@ -9,7 +9,7 @@
 import XCTest
 @testable import LinkedList
 
-class BCMDoublyLinkedListTests: XCTestCase {
+class LinkedListTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

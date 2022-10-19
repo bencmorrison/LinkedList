@@ -14,6 +14,7 @@ public final class LinkedList<T>: CustomStringConvertible {
     private(set) var tail: Node<T>? = nil
     
     // MARK: Initialisers
+    
     public convenience init(fromList: LinkedList<T>){
         self.init()
         addObjectsFrom(list: fromList)
@@ -39,6 +40,7 @@ public final class LinkedList<T>: CustomStringConvertible {
     }
     
     // MARK: - Inserting
+    
     public func pushFront(object: T) {
         let nodeToInsert: Node = Node(object: object)
         pushFront(node: nodeToInsert)
@@ -140,6 +142,7 @@ public final class LinkedList<T>: CustomStringConvertible {
     }
     
     // MARK: - Removing
+    
     public func emptyList() {
         var currentNode: Node? = head
         var nextNode: Node? = head?.next
@@ -158,22 +161,6 @@ public final class LinkedList<T>: CustomStringConvertible {
     }
     
     // MARK: - Querying
-    subscript (index: UInt) -> T {
-        get {
-            assert(
-                indexIsValid(index),
-                LinkedListError.indexOutOfBounds(outIndex: index).localizedDescription
-            )
-            return objectAt(index: index)
-        }
-        set {
-            assert(
-                indexIsValid(index, operation: .insert),
-                LinkedListError.indexOutOfBounds(outIndex: index).localizedDescription
-            )
-            insert(object: newValue, atIndex: index)
-        }
-    }
     
     public func objectAt(index: UInt) -> T {
         let node = nodeAt(index: index)
@@ -207,14 +194,15 @@ public final class LinkedList<T>: CustomStringConvertible {
         return subList
     }
     
+    // MARK: Validation
     
-    private enum Operation {
+    enum Operation {
         case query
         case insert
         case remove
     }
     
-    private func indexIsValid(_ index: UInt, operation: Operation = .query) -> Bool {
+    func indexIsValid(_ index: UInt, operation: Operation = .query) -> Bool {
         switch operation {
         case .query: return index < count
         case .insert: return index < count + 1

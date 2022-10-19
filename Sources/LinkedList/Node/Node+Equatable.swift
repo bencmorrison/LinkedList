@@ -8,28 +8,15 @@
 
 import Foundation
 
-extension Node: Equatable {
-    func isEqual(_ anObject: AnyObject?) -> Bool {
-        guard let anObject = anObject as? Node else {
-            return false
-        }
-        
-        return self == anObject
-    }
-    
-    public static func ==<T>(lhs: Node<T>, rhs: Node<T>) -> Bool {
-        return Unmanaged.passUnretained(lhs).toOpaque() == Unmanaged.passUnretained(rhs).toOpaque()
-    }
-    
-    public static func !=<T>(lhs: Node<T>, rhs: Node<T>) -> Bool {
-        return Unmanaged.passUnretained(lhs).toOpaque() != Unmanaged.passUnretained(rhs).toOpaque()
-    }
-    
-    public static func ==<T: Equatable>(lhs: Node<T>, rhs: Node<T>) -> Bool {
-        return lhs.object == rhs.object
-    }
-    
-    public static func !=<T: Equatable>(lhs: Node<T>, rhs: Node<T>) -> Bool {
-        return lhs.object != rhs.object
+extension Node where T: Equatable {
+    /**
+     This will check if it is similar by comparting the objects of the current
+     nodes and the next and previous.
+     */
+    func isSimilarTo(_ otherNode: Node<T>?) -> Bool {
+        guard let otherNode else { return false }
+        return object == otherNode.object &&
+            next?.object == otherNode.next?.object &&
+            previous?.object == otherNode.previous?.object
     }
 }

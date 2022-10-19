@@ -25,4 +25,12 @@ public class Node<T>: CustomStringConvertible {
     public var description: String {
         return "\(String(describing: previous?.object)) <-- \(object) --> \(String(describing: next?.object))"
     }
+    
+    /**
+     This does a straight up address check.
+     */
+    func isNode(_ otherNode: Node<T>?) -> Bool {
+        guard let otherNode else { return false }
+        return Unmanaged.passUnretained(self).toOpaque() == Unmanaged.passUnretained(otherNode).toOpaque()
+    }
 }
