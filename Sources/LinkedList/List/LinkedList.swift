@@ -8,111 +8,46 @@
 
 import Foundation
 
-public final class LinkedList<T>: CustomStringConvertible {
-    private(set) var count: UInt = 0
-    private(set) var head: Node<T>? = nil
-    private(set) var tail: Node<T>? = nil
+open class LinkedList<T> {
+    public typealias ListNode = Node<Element>
     
-    // MARK: Initialisers
-    
-    public convenience init(fromList: LinkedList<T>){
-        self.init()
-        addObjectsFrom(list: fromList)
-    }
-    
-    public convenience init(fromArray: [T]) {        
-        self.init()
-        addObjectsFrom(array: fromArray)
-    }
+    private(set) var count: Index = 0
+    private(set) var head: ListNode? = nil
+    private(set) weak var tail: ListNode? = nil
 
     deinit {
         emptyList()
     }
     
-    public var description: String {
-        var desc = "["
-        for val in self {
-            desc.append("\(val), ")
-        }
-        desc.append("]")
-        
-        return desc
-    }
-    
     // MARK: - Inserting
     
-    public func pushFront(object: T) {
-        let nodeToInsert: Node = Node(object: object)
-        pushFront(node: nodeToInsert)
-    }
-    
-    public func pushFront(node nodeToInsert: Node<T>) {
-        if head == nil {
-            head = nodeToInsert
-        }
-        
-        if tail == nil {
-            tail = head
-        }
-        
+    public func pushFront(node nodeToInsert: ListNode) {
         nodeToInsert.next = head
-        nodeToInsert.previous = head?.previous
+        nodeToInsert.previous = nil
         head?.previous = nodeToInsert
         head = nodeToInsert
-        tail?.next = head
         
-        count = count + 1
-    }
-    
-    public func pushBack(object: T) {
-        let nodeToInsert: Node = Node(object: object)
-        pushBack(node: nodeToInsert)
-    }
-    
-    public func pushBack(node nodeToInsert: Node<T>) {
-        if tail == nil {
+        if count == 0 {
             tail = nodeToInsert
         }
         
-        if head == nil {
-            head = tail
+        count++
+    }
+    
+    public func pushBack(node nodeToInsert: ListNode) {
+        guard count > 0 else {
+            pushFront(node: nodeToInsert)
+            return
         }
         
         nodeToInsert.previous = tail
-        nodeToInsert.next = tail?.next
+        nodeToInsert.next = nil
         tail?.next = nodeToInsert
         tail = nodeToInsert
-        head?.previous = tail
-    
-        count = count + 1
+        count++
     }
     
-    public func addObjectsFrom(list: LinkedList<T>) {
-        for item in list {
-            pushBack(object: item)
-        }
-    }
-    
-    public func addObjectsFrom(array: [T]) {
-        for item in array {
-            pushBack(object: item)
-        }
-    }
-    
-    public func add(object: T) {
-        pushBack(object: object)
-    }
-    
-    public func add(node: Node<T>) {
-        pushBack(node: node)
-    }
-    
-    public func insert(object: T, atIndex: UInt) {
-        let nodeToInsert = Node(object: object)
-        insert(node: nodeToInsert, atIndex: atIndex)
-    }
-    
-    public func insert(node: Node<T>, atIndex index: UInt) {
+    public func insert(node: ListNode, atIndex index: Index) {
         assert(indexIsValid(index, operation: .insert))
         
         if index == 0 {
@@ -127,25 +62,59 @@ public final class LinkedList<T>: CustomStringConvertible {
         }
     }
     
-    fileprivate func insert(object: T, beforeNode: Node<T>) {
-        let nodeToInsert = Node(object: object)
-        insert(node: nodeToInsert,
-               beforeNode: beforeNode)
-    }
-    
-    fileprivate func insert(node: Node<T>, beforeNode: Node<T>) {
-        beforeNode.previous?.next = node
-        node.previous = beforeNode.previous
-        node.next = beforeNode
-        beforeNode.previous = node
-        count = count + 1
+    internal func insert(node newNode: ListNode, beforeNode pushedDown: ListNode) {
+        let beforeNode = pushedDown.previous
+        
+        beforeNode?.next = newNode
+        newNode.previous = beforeNode
+        newNode.next = pushedDown
+        pushedDown.previous = newNode
+        
+        count++
     }
     
     // MARK: - Removing
     
+    @discardableResult
+    public func remove(at index: Index) -> ListNode {
+        var node: ListNode? = nodeAt(index: index)
+        remove(node: &node)
+        
+        return node!
+    }
+    
+    @discardableResult
+    public func dropFirst() -> ListNode? {
+        var toRemove = head
+        head = toRemove?.next
+        remove(node: &toRemove)
+        
+        return toRemove
+    }
+    
+    @discardableResult
+    public func dropLast() -> ListNode? {
+        var toRemove = tail
+        tail = toRemove?.previous
+        remove(node: &toRemove)
+        
+        return toRemove
+    }
+    
+    private func remove(node toRemove: inout ListNode?) {
+        let before = toRemove?.previous
+        let after = toRemove?.next
+        
+        before?.next = after
+        after?.previous = before
+        
+        toRemove?.next = nil
+        toRemove?.previous = nil
+    }
+    
     public func emptyList() {
-        var currentNode: Node? = head
-        var nextNode: Node? = head?.next
+        var currentNode: ListNode? = head
+        var nextNode: ListNode? = head?.next
         
         repeat {
             currentNode?.next = nil
@@ -161,48 +130,30 @@ public final class LinkedList<T>: CustomStringConvertible {
     }
     
     // MARK: - Querying
-    
-    public func objectAt(index: UInt) -> T {
-        let node = nodeAt(index: index)
-        return node.object
-    }
-    
-    public func nodeAt(index: UInt) -> Node<T> {
+        
+    public func nodeAt(index: Index) -> ListNode {
         assert(indexIsValid(index))
         
+        if index == 0 { return head! }
+        if index == (count - 1) { return tail! }
+        
         var node = head!
-        var i: UInt = 0
-        while i < index {
+        for _ in 0..<index {
             node = node.next!
-            i = i + 1
         }
         
         return node
     }
     
-    public func subList(fromRange range: ClosedRange<UInt>) throws -> LinkedList<T> {
-        let subList = LinkedList<T>()
-        
-        var index = range.lowerBound
-        var node = nodeAt(index: index)
-        while(index <= range.upperBound && index < count) {
-            subList.pushBack(object: node.object)
-            node = node.next!
-            index = index + 1
-        }
-        
-        return subList
-    }
-    
     // MARK: Validation
     
-    enum Operation {
+    internal enum Operation {
         case query
         case insert
         case remove
     }
     
-    func indexIsValid(_ index: UInt, operation: Operation = .query) -> Bool {
+    internal func indexIsValid(_ index: Index, operation: Operation = .query) -> Bool {
         switch operation {
         case .query: return index < count
         case .insert: return index < count + 1

@@ -8,25 +8,21 @@
 
 import Foundation
 
-extension LinkedList: Equatable where T: Equatable {
-    public static func ==(lhs: LinkedList<T>, rhs: LinkedList<T>) -> Bool {
+extension LinkedList: Equatable where Node<T>: Equatable {
+    public static func ==(lhs: LinkedList<Element>, rhs: LinkedList<Element>) -> Bool {
         guard lhs.count == rhs.count else { return false }
-        // Bypass having no nodes in the list we can force unwrap now
-        guard lhs.count > 0 else { return true }
         
-        // There should be no nils beyond this point
-        guard var lNode = lhs.head else { return false }
-        guard var rNode = rhs.head else { return false }
+        let count = lhs.count
+        guard count > 0 else { return true }
         
-        repeat {
-            guard lNode.isSimilarTo(rNode) else { return false }
-            guard let lNext = lNode.next, let rNext = rNode.next else { return false }
-            lNode = lNext
-            rNode = rNext
-            
-        } while (!lNode.isNode(lhs.head) && !rNode.isNode(rhs.head))
+        var lhsNode = lhs.head
+        var rhsNode = rhs.head
         
-        guard lNode.isNode(lhs.head) && rNode.isNode(rhs.head) else { return false }
+        for _ in 0..<count {
+            guard lhsNode == rhsNode else { return false }
+            lhsNode = lhsNode?.next
+            rhsNode = rhsNode?.next
+        }
         
         return true
     }

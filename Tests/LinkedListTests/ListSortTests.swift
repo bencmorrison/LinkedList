@@ -15,7 +15,7 @@ class ListSortTests: XCTestCase {
     var unsortedList: LinkedList<Int>!
 
     override func setUp() {
-        unsortedList = LinkedList<Int>(fromArray: unsortedArray)
+        unsortedList = LinkedList(from: unsortedArray)
     }
 
     override func tearDown() {

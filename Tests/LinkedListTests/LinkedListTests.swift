@@ -22,8 +22,8 @@ class LinkedListTests: XCTestCase {
     }
     
     func testExample() {
-        let list = LinkedList(fromArray: ["String", "String2"])
-        
+        let list = LinkedList(from: ["String", "String2"])
+
         for item in list {
             print("List: \(item)")
         }

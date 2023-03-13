@@ -9,13 +9,13 @@
 import Foundation
 
 extension LinkedList {
-    public typealias SortBlock = (_ left: T, _ right: T) -> Bool
+    public typealias SortBlock = (_ left: Element, _ right: Element) -> Bool
     
-    public func sorted(by comparison: SortBlock) throws -> LinkedList<T> {
+    public func sorted(by comparison: SortBlock) throws -> LinkedList<Element> {
         return _sort(list: self, by: comparison)
     }
     
-    private func _sort(list: LinkedList<T>, by comparison: SortBlock) -> LinkedList<T> {
+    private func _sort(list: LinkedList<Element>, by comparison: SortBlock) -> LinkedList<Element> {
         guard list.count > 1 else { return list }
         
         let middle: UInt = list.count / 2
@@ -28,34 +28,42 @@ extension LinkedList {
         return merge(left: left, right: right, comparison: comparison)
     }
     
-    private func merge(left: LinkedList<T>, right: LinkedList<T>, comparison: SortBlock) -> LinkedList<T> {
-        let merged: LinkedList<T> = LinkedList<T>()
+    private func merge(left: LinkedList<Element>, right: LinkedList<Element>, comparison: SortBlock) -> LinkedList<Element> {
+        let merged: LinkedList<Element> = LinkedList<Element>()
     
-        var leftNode = left.head!
-        var rightNode = right.head!
+        var leftNode = left.head
+        var rightNode = right.head
         
         var i: UInt = 0
         var j: UInt = 0
         
+        func comparisonWrapper(_ lhs: Element?, _ rhs: Element?) -> Bool {
+            if lhs != nil && rhs == nil { return true }
+            if lhs == nil && rhs != nil { return false }
+            
+            guard let lhs, let rhs else { return false }
+            return comparison(lhs, rhs)
+        }
+        
         while (i + j) < (left.count + right.count) {
-            if i == left.count {
-                merged.pushBack(object: rightNode.object)
-                rightNode = rightNode.next!
+            if let right = rightNode, i == left.count {
+                merged.pushBack(item: right.item)
+                rightNode = right.next
                 j = j + 1
             }
-            else if j == right.count {
-                merged.pushBack(object: leftNode.object)
-                leftNode = leftNode.next!
+            else if let left = leftNode, j == right.count {
+                merged.pushBack(item: left.item)
+                leftNode = left.next
                 i = i + 1
             }
-            else if comparison(leftNode.object, rightNode.object) {
-                merged.pushBack(object: leftNode.object)
-                leftNode = leftNode.next!
+            else if let left = leftNode, comparisonWrapper(leftNode?.item, rightNode?.item) {
+                merged.pushBack(item: left.item)
+                leftNode = left.next
                 i = i + 1
             }
-            else if !comparison(leftNode.object, rightNode.object) {
-                merged.pushBack(object: rightNode.object)
-                rightNode = rightNode.next!
+            else if let right = rightNode, !comparisonWrapper(leftNode?.item, rightNode?.item) {
+                merged.pushBack(item: right.item)
+                rightNode = right.next
                 j = j + 1
             }
         }

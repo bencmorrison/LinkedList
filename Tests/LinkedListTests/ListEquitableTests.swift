@@ -17,8 +17,8 @@ class ListEquitableTests: XCTestCase {
         var firstList: LinkedList<Int>!
         var secondList: LinkedList<Int>!
         
-        firstList = LinkedList<Int>(fromArray: array)
-        secondList = LinkedList<Int>(fromArray: array)
+        firstList = LinkedList(from: array)
+        secondList = LinkedList(from: array)
         
         XCTAssertEqual(firstList, secondList)
     }
@@ -27,8 +27,8 @@ class ListEquitableTests: XCTestCase {
         var firstList: LinkedList<Int>!
         var secondList: LinkedList<Int>!
         
-        firstList = LinkedList<Int>(fromArray: array)
-        secondList = LinkedList<Int>(fromList: firstList)
+        firstList = LinkedList(from: array)
+        secondList = LinkedList(from: firstList)
         
         XCTAssertEqual(firstList, secondList)
     }

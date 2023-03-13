@@ -11,7 +11,3 @@ import Foundation
 public enum LinkedListError: Error {
     case indexOutOfBounds(outIndex: UInt)
 }
-
-extension LinkedList {
-    
-}
