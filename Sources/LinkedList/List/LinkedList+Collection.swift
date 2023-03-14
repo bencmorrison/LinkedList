@@ -15,11 +15,6 @@ extension LinkedList: Collection {
     public var startIndex: Index { 0 }
     public var endIndex: Index { count }
     
-    public convenience init(from collection: any Collection<Element>) {
-        self.init()
-        addObjectsFrom(collection: collection)
-    }
-    
     public func makeIterator() -> Iterator {
         return LinkedListIterator<T>(list: self)
     }
@@ -38,7 +33,7 @@ extension LinkedList: Collection {
         let subList = LinkedList<Element>()
         
         var index = range.lowerBound
-        var node = nodeAt(index: index)
+        var node = nodeAt(index)
         while(index <= range.upperBound && index < count) {
             subList.pushBack(item: node.item)
             index++

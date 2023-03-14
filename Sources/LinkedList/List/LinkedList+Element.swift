@@ -7,8 +7,9 @@
 
 import Foundation
 
+// MARK: - Element Extension
 extension LinkedList {
-    // MARK: - Inserting
+    // MARK: Inserting
     
     private func insert(item: Element, beforeNode: ListNode) {
         let nodeToInsert = ListNode(item: item)
@@ -44,7 +45,7 @@ extension LinkedList {
         insert(node: nodeToInsert, atIndex: atIndex)
     }
     
-    // MARK: - Removing
+    // MARK: Removing
     
     @discardableResult
     public func dropFirstItem() -> Element? {
@@ -56,10 +57,23 @@ extension LinkedList {
         dropLast()?.item
     }
     
-    // MARK: - Querying
+    // MARK: Querying
     
     public func itemAt(index: Index) -> T {
-        let node = nodeAt(index: index)
+        let node = nodeAt(index)
         return node.item
+    }
+}
+
+
+// MARK: - Equitable
+extension LinkedList where Element: Equatable {
+    // MARK: Querying
+    
+    public func contains(_ item: Element) -> Bool {
+        for storedItem in self {
+            if storedItem == item { return true }
+        }
+        return false
     }
 }

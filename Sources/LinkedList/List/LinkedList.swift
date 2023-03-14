@@ -14,6 +14,11 @@ open class LinkedList<T> {
     private(set) var count: Index = 0
     private(set) var head: ListNode? = nil
     private(set) weak var tail: ListNode? = nil
+    
+    public convenience init(from collection: any Collection<Element>) {
+        self.init()
+        addObjectsFrom(collection: collection)
+    }
 
     deinit {
         emptyList()
@@ -57,7 +62,7 @@ open class LinkedList<T> {
             pushBack(node: node)
         }
         else {
-            let beforeNode = nodeAt(index: index)
+            let beforeNode = nodeAt(index)
             insert(node: node, beforeNode: beforeNode)
         }
     }
@@ -77,7 +82,7 @@ open class LinkedList<T> {
     
     @discardableResult
     public func remove(at index: Index) -> ListNode {
-        var node: ListNode? = nodeAt(index: index)
+        var node: ListNode? = nodeAt(index)
         remove(node: &node)
         
         return node!
@@ -113,16 +118,13 @@ open class LinkedList<T> {
     }
     
     public func emptyList() {
-        var currentNode: ListNode? = head
-        var nextNode: ListNode? = head?.next
-        
-        repeat {
-            currentNode?.next = nil
-            currentNode?.previous = nil
-            
-            currentNode = nextNode
-            nextNode = currentNode?.next
-        } while (currentNode != nil)
+        var node = head
+        while node != nil {
+            let nextNode = node?.next
+            node?.next = nil
+            node?.previous = nil
+            node = nextNode
+        }
         
         head = nil
         tail = nil
@@ -131,7 +133,7 @@ open class LinkedList<T> {
     
     // MARK: - Querying
         
-    public func nodeAt(index: Index) -> ListNode {
+    public func nodeAt(_ index: Index) -> ListNode {
         assert(indexIsValid(index))
         
         if index == 0 { return head! }
@@ -143,6 +145,27 @@ open class LinkedList<T> {
         }
         
         return node
+    }
+    
+    open func contains(_ searchNode: ListNode) -> Bool {
+        let searchPointer = Unmanaged.passUnretained(searchNode).toOpaque()
+        var node = head
+        while node != nil {
+            let nodePointer = Unmanaged.passUnretained(node!).toOpaque()
+            if searchPointer == nodePointer { return true }
+        }
+        
+        return false
+    }
+    
+    // MARK: Iteration
+    public typealias ForEachNodeClosure = (_ node: ListNode) -> ()
+    public func forEachNode(_ closure: ForEachNodeClosure) {
+        var node = head
+        while node != nil {
+            closure(node!)
+            node = node?.next
+        }
     }
     
     // MARK: Validation
