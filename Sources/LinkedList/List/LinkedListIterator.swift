@@ -23,7 +23,7 @@ public struct LinkedListIterator<T>: IteratorProtocol {
     public mutating func next() -> Element? {
         guard let currentNode else { return nil }
         
-        let object = currentNode.item
+        let object = currentNode.element
         self.currentNode = currentNode.next
         
         return object

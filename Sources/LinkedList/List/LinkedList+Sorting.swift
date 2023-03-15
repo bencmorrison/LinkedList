@@ -17,7 +17,7 @@ extension LinkedList {
         var index = range.lowerBound
         var node = nodeAt(index)
         while(index <= range.upperBound && index < count) {
-            subList.pushBack(item: node.item)
+            subList.pushBack(node.element)
             index += 1
             if index < count { node = node.next! }
         }
@@ -61,22 +61,22 @@ extension LinkedList {
         
         while (i + j) < (left.count + right.count) {
             if let right = rightNode, i == left.count {
-                merged.pushBack(item: right.item)
+                merged.pushBack(right.element)
                 rightNode = right.next
                 j = j + 1
             }
             else if let left = leftNode, j == right.count {
-                merged.pushBack(item: left.item)
+                merged.pushBack(left.element)
                 leftNode = left.next
                 i = i + 1
             }
-            else if let left = leftNode, comparisonWrapper(leftNode?.item, rightNode?.item) {
-                merged.pushBack(item: left.item)
+            else if let left = leftNode, comparisonWrapper(leftNode?.element, rightNode?.element) {
+                merged.pushBack(left.element)
                 leftNode = left.next
                 i = i + 1
             }
-            else if let right = rightNode, !comparisonWrapper(leftNode?.item, rightNode?.item) {
-                merged.pushBack(item: right.item)
+            else if let right = rightNode, !comparisonWrapper(leftNode?.element, rightNode?.element) {
+                merged.pushBack(right.element)
                 rightNode = right.next
                 j = j + 1
             }

@@ -9,8 +9,6 @@ import Foundation
 
 extension Node: Equatable where T: Equatable {
     public static func ==(lhs: Node<T>, rhs: Node<T>) -> Bool {
-        return lhs.previous?.item == rhs.previous?.item &&
-        lhs.item == rhs.item &&
-        lhs.next?.item == rhs.next?.item
+        return lhs.element == rhs.element
     }
 }

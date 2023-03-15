@@ -9,12 +9,12 @@
 import Foundation
 
 open class Node<T> {
-    var item: T
-    var next: Node<T>?
-    weak var previous: Node<T>?
+    public var element: T
+    public internal(set) var next: Node<T>?
+    public internal(set) weak var previous: Node<T>?
     
-    init(item: T, next: Node<T>? = nil, previous: Node<T>? = nil) {
-        self.item = item
+    init(_ element: T, next: Node<T>? = nil, previous: Node<T>? = nil) {
+        self.element = element
         self.next = next
         self.previous = previous
     }

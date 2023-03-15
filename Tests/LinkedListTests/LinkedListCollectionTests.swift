@@ -29,7 +29,7 @@ final class LinkedListCollectionTests: XCTestCase {
     
     func testSubscripting() throws {
         for index in 0..<sut.count {
-            let indexAtItem = sut.nodeAt(index).item
+            let indexAtItem = sut.nodeAt(index).element
             let subscriptItem = sut[index]
             
             XCTAssertEqual(subscriptItem, indexAtItem)

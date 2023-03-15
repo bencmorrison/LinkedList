@@ -11,20 +11,26 @@ import XCTest
 
 class LinkedListTests: XCTestCase {
     
-    override func setUp() {
+    var vts: [Int]!
+    var sut: LinkedList<Int>!
+    
+    override func setUpWithError() throws {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testInitFromAnArray() throws {
-        let vts = [1, 2, 3, 4, 5, 6]
-        let sut = LinkedList(from: vts)
-        
+        vts = [1, 2, 3, 4, 5, 6]
+        sut = LinkedList(from: vts)
         try XCTAssertList(sut, matches: vts)
+    }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut.removeAll()
+    }
+    
+    func testForEachNode() throws {
+        var index = 0
+        sut.forEachNode {
+            XCTAssertEqual(vts[index], $0.element)
+            index += 1
+        }
     }
 }

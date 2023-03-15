@@ -27,31 +27,45 @@ final class LinkedListNodeRemovingTests: XCTestCase {
     func testRemoveAtIndex() throws {
         var index = 2
         vts.remove(at: index)
-        sut.remove(at: index)
+        sut.removeNode(at: index)
         try XCTAssertList(sut, matches: vts)
         
         index = 1
         vts.remove(at: index)
-        sut.remove(at: index)
+        sut.removeNode(at: index)
         try XCTAssertList(sut, matches: vts)
         
         index = vts.count - 1
         vts.remove(at: index)
-        sut.remove(at: index)
+        sut.removeNode(at: index)
         try XCTAssertList(sut, matches: vts)
     }
     
-    func testDropFirst() throws {
-        vts.remove(at: 0)
-        sut.dropFirst()
+    func testDropLast() throws {
+        vts.removeFirst()
+        sut.removeFirstNode()
         try XCTAssertList(sut, matches: vts)
         
-        vts.remove(at: 0)
-        sut.dropFirst()
+        vts.removeFirst()
+        sut.removeFirstNode()
         try XCTAssertList(sut, matches: vts)
         
-        vts.remove(at: 0)
-        sut.dropFirst()
+        vts.removeFirst()
+        sut.removeFirstNode()
+        try XCTAssertList(sut, matches: vts)
+    }
+    
+    func testDropLastNode() throws {
+        vts.removeLast()
+        sut.removeLastNode()
+        try XCTAssertList(sut, matches: vts)
+        
+        vts.removeLast()
+        sut.removeLastNode()
+        try XCTAssertList(sut, matches: vts)
+        
+        vts.removeLast()
+        sut.removeLastNode()
         try XCTAssertList(sut, matches: vts)
     }
     

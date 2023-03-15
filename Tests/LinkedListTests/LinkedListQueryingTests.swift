@@ -27,7 +27,7 @@ final class LinkedListQueryingTests: XCTestCase {
     func testIndexAt() throws {
         for index in 0..<vts.count {
             let vtsItem = vts[index]
-            let sutItem = sut.nodeAt(index).item
+            let sutItem = sut.nodeAt(index).element
             
             XCTAssertEqual(sutItem, vtsItem)
         }

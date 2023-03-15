@@ -25,7 +25,7 @@ extension XCTestCase {
             
             repeat {
                 let node = try XCTUnwrap(currentNode)
-                let nodeItem = node.item
+                let nodeItem = node.element
                 
                 let arrayItem = array[index]
                 
