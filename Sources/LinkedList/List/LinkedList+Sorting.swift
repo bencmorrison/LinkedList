@@ -11,6 +11,20 @@ import Foundation
 extension LinkedList {
     public typealias SortBlock = (_ left: Element, _ right: Element) -> Bool
     
+    public func subList(fromRange range: ClosedRange<Index>) throws -> LinkedList<Element> {
+        let subList = LinkedList<Element>()
+        
+        var index = range.lowerBound
+        var node = nodeAt(index)
+        while(index <= range.upperBound && index < count) {
+            subList.pushBack(item: node.item)
+            index++
+            if index < count { node = node.next! }
+        }
+        
+        return subList
+    }
+    
     public func sorted(by comparison: SortBlock) throws -> LinkedList<Element> {
         return _sort(list: self, by: comparison)
     }

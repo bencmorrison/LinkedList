@@ -27,9 +27,4 @@ class LinkedListTests: XCTestCase {
         
         try XCTAssertList(sut, matches: vts)
     }
-    
-    func testyTest() throws {
-        LinkedList<Int>().dropFirst()
-        
-    }
 }
