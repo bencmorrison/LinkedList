@@ -20,7 +20,7 @@ final class LinkedListNodeInsertingTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        sut.emptyList()
+        sut.removeAll()
     }
 
     func testInsertBeforeOnEmptyList() throws {

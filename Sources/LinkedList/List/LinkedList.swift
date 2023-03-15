@@ -21,7 +21,7 @@ open class LinkedList<T> {
     }
 
     deinit {
-        emptyList()
+        removeAll()
     }
     
     // MARK: - Inserting
@@ -114,11 +114,15 @@ open class LinkedList<T> {
         before?.next = after
         after?.previous = before
         
+        if toRemove.isNode(head) { head = head?.next }
+        if toRemove.isNode(tail) { tail = tail?.previous }
+        
         toRemove.next = nil
         toRemove.previous = nil
+        count--
     }
     
-    public func emptyList() {
+    public func removeAll() {
         var node = head
         while node != nil {
             let nextNode = node?.next

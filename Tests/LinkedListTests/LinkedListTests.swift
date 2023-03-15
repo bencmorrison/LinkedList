@@ -21,19 +21,15 @@ class LinkedListTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        let list = LinkedList(from: ["String", "String2"])
-
-        for item in list {
-            print("List: \(item)")
-        }
+    func testInitFromAnArray() throws {
+        let vts = [1, 2, 3, 4, 5, 6]
+        let sut = LinkedList(from: vts)
+        
+        try XCTAssertList(sut, matches: vts)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testyTest() throws {
+        LinkedList<Int>().dropFirst()
+        
     }
-    
 }
