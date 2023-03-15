@@ -26,54 +26,55 @@ open class LinkedList<T> {
     
     // MARK: - Inserting
     
-    public func pushFront(node nodeToInsert: ListNode) {
-        nodeToInsert.next = head
-        nodeToInsert.previous = nil
-        head?.previous = nodeToInsert
-        head = nodeToInsert
-        
-        if count == 0 {
-            tail = nodeToInsert
-        }
-        
-        count++
+    public func pushFront(node: ListNode) {
+        insert(node: node, beforeNode: head)
     }
     
-    public func pushBack(node nodeToInsert: ListNode) {
-        guard count > 0 else {
-            pushFront(node: nodeToInsert)
-            return
-        }
-        
-        nodeToInsert.previous = tail
-        nodeToInsert.next = nil
-        tail?.next = nodeToInsert
-        tail = nodeToInsert
-        count++
+    public func pushBack(node: ListNode) {
+        insert(node: node, afterNode: tail)
     }
     
     public func insert(node: ListNode, atIndex index: Index) {
-        assert(indexIsValid(index, operation: .insert))
+        assertValidIndex(index)
         
-        if index == 0 {
-            pushFront(node: node)
-        }
-        else if index == count {
-            pushBack(node: node)
-        }
-        else {
+        if index == count {
+            insert(node: node, afterNode: tail)
+        } else {
             let beforeNode = nodeAt(index)
             insert(node: node, beforeNode: beforeNode)
         }
     }
     
-    internal func insert(node newNode: ListNode, beforeNode pushedDown: ListNode) {
-        let beforeNode = pushedDown.previous
+    internal func insert(node newNode: ListNode, beforeNode: ListNode?) {
+        if let beforeNode {
+            newNode.previous = beforeNode.previous
+            newNode.next = beforeNode
+            beforeNode.previous?.next = newNode
+            beforeNode.previous = newNode
+            if beforeNode.isNode(head) { head = newNode }
+            
+        } else {
+            guard head == nil else { return }
+            head = newNode
+            if tail == nil { tail = newNode }
+        }
         
-        beforeNode?.next = newNode
-        newNode.previous = beforeNode
-        newNode.next = pushedDown
-        pushedDown.previous = newNode
+        count++
+    }
+    
+    internal func insert(node newNode: ListNode, afterNode: ListNode?) {
+        if let afterNode {
+            newNode.next = afterNode.next
+            newNode.previous = afterNode
+            afterNode.next?.previous = newNode
+            afterNode.next = newNode
+            if afterNode.isNode(tail) { tail = newNode }
+            
+        } else {
+            guard tail == nil else { return }
+            tail = newNode
+            if head == nil { head = newNode }
+        }
         
         count++
     }
@@ -82,39 +83,39 @@ open class LinkedList<T> {
     
     @discardableResult
     public func remove(at index: Index) -> ListNode {
-        var node: ListNode? = nodeAt(index)
+        assertListIsNotEmpty()
+        
+        var node = nodeAt(index)
         remove(node: &node)
         
-        return node!
+        return node
     }
     
     @discardableResult
     public func dropFirst() -> ListNode? {
-        var toRemove = head
-        head = toRemove?.next
-        remove(node: &toRemove)
-        
-        return toRemove
+        assertListIsNotEmpty()
+        var head = head!
+        remove(node: &head)
+        return head
     }
     
     @discardableResult
     public func dropLast() -> ListNode? {
-        var toRemove = tail
-        tail = toRemove?.previous
-        remove(node: &toRemove)
-        
-        return toRemove
+        assertListIsNotEmpty()
+        var tail = tail!
+        remove(node: &tail)
+        return tail
     }
     
-    private func remove(node toRemove: inout ListNode?) {
-        let before = toRemove?.previous
-        let after = toRemove?.next
+    private func remove(node toRemove: inout ListNode) {
+        let before = toRemove.previous
+        let after = toRemove.next
         
         before?.next = after
         after?.previous = before
         
-        toRemove?.next = nil
-        toRemove?.previous = nil
+        toRemove.next = nil
+        toRemove.previous = nil
     }
     
     public func emptyList() {
@@ -134,7 +135,7 @@ open class LinkedList<T> {
     // MARK: - Querying
         
     public func nodeAt(_ index: Index) -> ListNode {
-        assert(indexIsValid(index))
+        assertValidIndex(index)
         
         if index == 0 { return head! }
         if index == (count - 1) { return tail! }
@@ -153,6 +154,7 @@ open class LinkedList<T> {
         while node != nil {
             let nodePointer = Unmanaged.passUnretained(node!).toOpaque()
             if searchPointer == nodePointer { return true }
+            node = node?.next
         }
         
         return false
@@ -165,22 +167,6 @@ open class LinkedList<T> {
         while node != nil {
             closure(node!)
             node = node?.next
-        }
-    }
-    
-    // MARK: Validation
-    
-    internal enum Operation {
-        case query
-        case insert
-        case remove
-    }
-    
-    internal func indexIsValid(_ index: Index, operation: Operation = .query) -> Bool {
-        switch operation {
-        case .query: return index < count
-        case .insert: return index < count + 1
-        case .remove: return index < count
         }
     }
 }

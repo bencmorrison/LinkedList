@@ -18,4 +18,9 @@ open class Node<T> {
         self.next = next
         self.previous = previous
     }
+    
+    func isNode(_ other: Node<T>?) -> Bool {
+        guard let other else { return false }
+        return Unmanaged.passUnretained(self).toOpaque() == Unmanaged.passUnretained(other).toOpaque()
+    }
 }
