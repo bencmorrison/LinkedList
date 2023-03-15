@@ -11,13 +11,13 @@ import Foundation
 open class LinkedList<T>: Collection {
     public typealias Element = T
     public typealias ListNode = Node<Element>
-    public typealias Index = UInt
+    public typealias Index = Int
     public typealias Iterator = LinkedListIterator<Element>
     
     public var startIndex: Index { 0 }
     public var endIndex: Index { count }
     
-    private(set) var count: Index = 0
+    private(set) public var count: Index = 0
     private(set) var head: ListNode? = nil
     private(set) weak var tail: ListNode? = nil
     
@@ -65,7 +65,7 @@ open class LinkedList<T>: Collection {
             if tail == nil { tail = newNode }
         }
         
-        count++
+        count += 1
     }
     
     internal func insert(node newNode: ListNode, afterNode: ListNode?) {
@@ -82,7 +82,7 @@ open class LinkedList<T>: Collection {
             if head == nil { head = newNode }
         }
         
-        count++
+        count += 1
     }
     
     // MARK: - Removing
@@ -126,7 +126,7 @@ open class LinkedList<T>: Collection {
         
         toRemove.next = nil
         toRemove.previous = nil
-        count--
+        count -= 1
     }
     
     public func removeAll() {

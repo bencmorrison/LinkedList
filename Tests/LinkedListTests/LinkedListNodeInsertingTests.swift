@@ -129,31 +129,31 @@ final class LinkedListNodeInsertingTests: XCTestCase {
         var letter = "a"
         var index: Int = 1
         vts.insert(letter, at: index)
-        sut.insert(node: Node(item: letter), atIndex: UInt(index))
+        sut.insert(node: Node(item: letter), atIndex: index)
         try XCTAssertList(sut, matches: vts)
         
         letter = "i"
         index = 3
         vts.insert(letter, at: index)
-        sut.insert(node: Node(item: letter), atIndex: UInt(index))
+        sut.insert(node: Node(item: letter), atIndex: index)
         try XCTAssertList(sut, matches: vts)
         
         letter = "o"
         index = 5
         vts.insert(letter, at: index)
-        sut.insert(node: Node(item: letter), atIndex: UInt(index))
+        sut.insert(node: Node(item: letter), atIndex: index)
         try XCTAssertList(sut, matches: vts)
         
         letter = "i"
         index = 8
         vts.insert(letter, at: index)
-        sut.insert(node: Node(item: letter), atIndex: UInt(index))
+        sut.insert(node: Node(item: letter), atIndex: index)
         try XCTAssertList(sut, matches: vts)
         
         letter = "a"
         index = 9
         vts.insert(letter, at: index)
-        sut.insert(node: Node(item: letter), atIndex: UInt(index))
+        sut.insert(node: Node(item: letter), atIndex: index)
         try XCTAssertList(sut, matches: vts)
     }
 }

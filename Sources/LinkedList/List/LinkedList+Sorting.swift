@@ -18,7 +18,7 @@ extension LinkedList {
         var node = nodeAt(index)
         while(index <= range.upperBound && index < count) {
             subList.pushBack(item: node.item)
-            index++
+            index += 1
             if index < count { node = node.next! }
         }
         
@@ -32,7 +32,7 @@ extension LinkedList {
     private func _sort(list: LinkedList<Element>, by comparison: SortBlock) -> LinkedList<Element> {
         guard list.count > 1 else { return list }
         
-        let middle: UInt = list.count / 2
+        let middle = list.count / 2
         
         let frontHalf = try! list.subList(fromRange: 0...middle - 1)
         let backHalf = try! list.subList(fromRange: middle...list.count - 1)

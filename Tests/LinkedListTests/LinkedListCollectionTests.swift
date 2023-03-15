@@ -28,7 +28,7 @@ final class LinkedListCollectionTests: XCTestCase {
     }
     
     func testSubscripting() throws {
-        for index: UInt in 0..<sut.count {
+        for index in 0..<sut.count {
             let indexAtItem = sut.nodeAt(index).item
             let subscriptItem = sut[index]
             
