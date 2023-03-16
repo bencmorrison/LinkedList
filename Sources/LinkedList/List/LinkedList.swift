@@ -19,16 +19,27 @@ import Foundation
  Ex: `removeFirst()` vs `removeFirstNode()`
  */
 open class LinkedList<T>: Collection {
+    /// Alias for `T` for the list and nodes. Ex: `LinkedList<T>`
     public typealias Element = T
+    /// Alias for `Node<Element>`
     public typealias ListNode = Node<Element>
+    /// Defines the type for the Index.
     public typealias Index = Int
+    /// Defines the type for the Iterator from the Collection protocol
     public typealias Iterator = LinkedListIterator<Element>
     
+    /// The position of the first element in the list.
+    /// If the list is empty this will equal `endIndex`
     public var startIndex: Index { 0 }
+    /// The index after the last index. "Past the end"
+    /// If the list is empty, this will equal `startIndex`
     public var endIndex: Index { count }
     
+    /// The number of items in the list.
     private(set) public var count: Index = 0
+    /// The first node in the list.
     private(set) var head: ListNode? = nil
+    /// The last node in the list.
     private(set) weak var tail: ListNode? = nil
     
     /**
@@ -153,7 +164,6 @@ open class LinkedList<T>: Collection {
      */
     @discardableResult
     public func removeNode(at index: Index) -> ListNode {
-        assertListIsNotEmpty()
         assertValidIndex(index, for: .remove)
         var node = nodeAt(index)
         removeNode(&node)
@@ -167,7 +177,7 @@ open class LinkedList<T>: Collection {
      */
     @discardableResult
     public func removeFirstNode() -> ListNode {
-        assertListIsNotEmpty()
+        assertValidIndex(0)
         var head = head!
         removeNode(&head)
         return head
@@ -180,7 +190,7 @@ open class LinkedList<T>: Collection {
      */
     @discardableResult
     public func removeLastNode() -> ListNode {
-        assertListIsNotEmpty()
+        assertValidIndex(count - 1)
         var tail = tail!
         removeNode(&tail)
         return tail
@@ -223,7 +233,7 @@ open class LinkedList<T>: Collection {
         count = 0
     }
     
-    // MARK: - Querying
+    // MARK: Querying
     
     /**
      Gets the node at the specified index from the list.
@@ -233,7 +243,6 @@ open class LinkedList<T>: Collection {
      - Returns: The node at the specified index
      */
     public func nodeAt(_ index: Index) -> ListNode {
-        assertListIsNotEmpty()
         assertValidIndex(index)
         
         if index == (count - 1) { return tail! }
@@ -285,15 +294,27 @@ open class LinkedList<T>: Collection {
     }
     
     // MARK: - Collection
+    /// Returns the iterator for the list
     public func makeIterator() -> Iterator {
         return LinkedListIterator<T>(list: self)
     }
     
+    /**
+     Allows access and setting of the list's element at the specified position.
+     - Warning: If index is out of bounds when called an `assertFailure` will occure
+     - Parameter position: The position (or index) of the element to access or insert/replace.
+     - Returns: The element at the position (when used for getting)
+     */
     public subscript(position: Index) -> Element {
         get { return itemAt(index: position) }
         set { insert(newValue, atIndex: position) }
     }
     
+    /**
+     Returns the index imediately after the given index.
+     - Parameter after: the index from which the next index
+            should be generated from.
+     */
     public func index(after i: Index) -> Index {
         let nextIndex = i + 1
         return nextIndex

@@ -24,7 +24,7 @@ class ListSortTests: XCTestCase {
 
     func testSortingAsc() {
         sortedArray = unsortedArray.sorted { $0 < $1 }
-        let sortedList = try! unsortedList.sorted { $0 < $1 }
+        let sortedList = unsortedList.sorted { $0 < $1 }
         
         var previous = 0
         for value in sortedList {
@@ -35,7 +35,7 @@ class ListSortTests: XCTestCase {
     
     func testSortingDes() {
         sortedArray = unsortedArray.sorted { $0 > $1 }
-        let sortedList = try! unsortedList.sorted { $0 > $1 }
+        let sortedList = unsortedList.sorted { $0 > $1 }
         
         var previous:Int = Int.max
         for value in sortedList {

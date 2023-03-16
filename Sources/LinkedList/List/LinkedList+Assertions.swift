@@ -11,14 +11,32 @@ import Foundation
 extension LinkedList {
     // MARK: Validation
     
+    /**
+     Used for `assertValidIndex(_:for:file:line:)` function.
+     Operation is used to define the index checks.
+     */
     internal enum Operation: String {
+        /// Used when the check is for querying the list
         case query
+        /// Used when the check is for an insert to the list
         case insert
+        /// Used when the check is for a removal of a node from the list
+        /// and also ensures that count is not zero.
         case remove
     }
     
-    // fatalError(_ message: @autoclosure () -> String = String(), file: StaticString = #file, line: UInt = #line)
-    
+    /**
+     Used to assert that the index passed into a function is valid.
+     The operation type is required to determine if the index passed
+     is a valid index for the operation type.
+     
+     Generally speaking, an insert index can be `count`, while query
+     and removal must be `count - 1`
+     - Parameters:
+        - index: The index that needs to be checked for validity
+        - operation: The operation type we are checking.
+     - Warning: A `fatalError` will occure if the index is out of bounds.
+     */
     internal func assertValidIndex(
         _ index: Index, for operation: Operation = .query,
         file: StaticString = #file, line: UInt = #line
@@ -33,13 +51,14 @@ extension LinkedList {
         }
         
         guard !okay else { return }
-        fatalError("Index out of bounds for operation: \(operation.rawValue)", file: file, line: line)
-    }
-    
-    internal func assertListIsNotEmpty(
-        ile: StaticString = #file, line: UInt = #line
-    ) {
-        guard count == 0 else { return }
-        fatalError("Unable to perform action on an empty list.")
+        
+        let message: String
+        if count == 0 {
+            message = "Unable to peform operation (\(operation.rawValue)) on an empty list."
+        } else {
+            message = "Index out of bounds for operation: \(operation.rawValue)."
+        }
+        
+        fatalError(message, file: file, line: line)
     }
 }
