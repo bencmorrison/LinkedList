@@ -15,7 +15,7 @@ extension LinkedList {
      Used for `assertValidIndex(_:for:file:line:)` function.
      Operation is used to define the index checks.
      */
-    internal enum Operation: String {
+    public enum Operation: String {
         /// Used when the check is for querying the list
         case query
         /// Used when the check is for an insert to the list
@@ -34,10 +34,10 @@ extension LinkedList {
      and removal must be `count - 1`
      - Parameters:
         - index: The index that needs to be checked for validity
-        - operation: The operation type we are checking.
+        - operation: The operation type we are checking. Default: `query`
      - Warning: A `fatalError` will occure if the index is out of bounds.
      */
-    internal func assertValidIndex(
+    public func assertValidIndex(
         _ index: Index, for operation: Operation = .query,
         file: StaticString = #file, line: UInt = #line
     ) {

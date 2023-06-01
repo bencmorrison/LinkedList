@@ -17,19 +17,19 @@ extension XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line) throws {
             
-            XCTAssertEqual(list.count, array.count)
+            XCTAssertEqual(list.count, array.count, message())
             guard array.count > 0 else { return }
             
             var index: Array.Index = 0
             var currentNode = list.head
             
             repeat {
-                let node = try XCTUnwrap(currentNode)
+                let node = try XCTUnwrap(currentNode, message())
                 let nodeItem = node.element
                 
                 let arrayItem = array[index]
                 
-                XCTAssertEqual(nodeItem, arrayItem)
+                XCTAssertEqual(nodeItem, arrayItem, message())
                 
                 index += 1
                 currentNode = node.next

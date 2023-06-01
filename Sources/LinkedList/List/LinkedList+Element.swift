@@ -7,8 +7,11 @@
 
 import Foundation
 
-// MARK: - Element Extension
+/**
+ This extension allows the use of `Element` type for list operatoins.
+ */
 extension LinkedList {
+    
     // MARK: Inserting
     
     /**

@@ -18,7 +18,7 @@ import Foundation
  If you'd like the `Node` there are some equiviant functions with the word node in them.
  Ex: `removeFirst()` vs `removeFirstNode()`
  */
-open class LinkedList<T>: Collection {
+open class LinkedList<T>: Collection, CustomStringConvertible, CustomDebugStringConvertible {
     /// Alias for `T` for the list and nodes. Ex: `LinkedList<T>`
     public typealias Element = T
     /// Alias for `Node<Element>`
@@ -318,5 +318,28 @@ open class LinkedList<T>: Collection {
     public func index(after i: Index) -> Index {
         let nextIndex = i + 1
         return nextIndex
+    }
+    
+    // MARK: - CustomStringConvertible
+    
+    /**
+     A string representing the list as an array ([Element, Element])
+     */
+    open var description: String {
+        var desc = "["
+        forEachNode { desc.append(String(describing: $0.element)) }
+        desc.append("]")
+        return desc
+    }
+    
+    public var debugDescription: String {
+        var desc = ""
+        var index = 0
+        forEachNode {
+            desc.append("Index: \(index)")
+            desc.append($0.debugDescription)
+            index += 1
+        }
+        return desc
     }
 }
