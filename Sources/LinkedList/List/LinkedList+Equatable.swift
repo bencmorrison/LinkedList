@@ -1,10 +1,4 @@
-//
-//  BCMDoublyLinkedListEquatableExtension.swift
-//  BCMDoublyLinkedList
-//
-//  Created by Ben Morrison on 2/05/2016.
-//  Copyright © 2016 Benjamin C Morrison. All rights reserved.
-//
+// Copyright © 2023 Ben Morrison. All rights reserved.
 
 import Foundation
 

@@ -1,19 +1,12 @@
-//
-//  BCMDoublyLinkedList+Sorting.swift
-//  BCMDoublyLinkedList
-//
-//  Created by Ben Morrison on 15/1/17.
-//  Copyright © 2017 Benjamin C Morrison. All rights reserved.
-//
+// Copyright © 2023 Ben Morrison. All rights reserved.
 
 import Foundation
 
 extension LinkedList {
-    /**
-     Returns a new linked list that contains only the elements in the range defined.
-     - Parameter range: The range to use for the sublist elements
-     - Returns: A new sublist of the elements in the subrange
-     */
+    
+    /// Returns a new linked list that contains only the elements in the range defined.
+    /// - Parameter range: The range to use for the sublist elements
+    /// - Returns: A new sublist of the elements in the subrange
     public func subList(fromRange range: ClosedRange<Index>) throws -> LinkedList<Element> {
         let subList = LinkedList<Element>()
         
@@ -28,22 +21,18 @@ extension LinkedList {
         return subList
     }
     
-    /**
-     Used by the `sort(by:)` function to determine sort order of the list.
-     - Parameters:
-        - lhs: The element to be used on the left side of the comparison operation
-        - rhs: The element to be used on the right side of the comparison operation
-     - Returns: True means correct order, flase means wrong order.
-     */
+    /// Used by the `sort(by:)` function to determine sort order of the list.
+    /// - Parameters:
+    ///    - lhs: The element to be used on the left side of the comparison operation
+    ///    - rhs: The element to be used on the right side of the comparison operation
+    /// - Returns: True means correct order, flase means wrong order.
     public typealias SortByClosure = (_ lhs: Element, _ rhs: Element) throws -> Bool
     
-    /**
-     Sorts the list by the the given predicate. This uses a merge sort.
-     - Parameter comparison: (`SortByClosure`) The closure that determines the
-        sort order of the list. Returning true means the order is correct of
-        two elements. Returning false means the order of the elements is incorrect.
-     - Returns: A sorted `LinkedList`
-     */
+    /// Sorts the list by the the given predicate. This uses a merge sort.
+    /// - Parameter comparison: (`SortByClosure`) The closure that determines the
+    ///    sort order of the list. Returning true means the order is correct of
+    ///    two elements. Returning false means the order of the elements is incorrect.
+    /// - Returns: A sorted `LinkedList`
     public func sorted(by comparison: SortByClosure) rethrows -> LinkedList<Element> {
         return try _sort(list: self, by: comparison)
     }

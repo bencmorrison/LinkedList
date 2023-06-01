@@ -1,9 +1,4 @@
-//
-//  LinkedList+Assertions.swift
-//  
-//
-//  Created by Benjamin Morrison on 15/3/2023.
-//
+// Copyright © 2023 Ben Morrison. All rights reserved.
 
 import Foundation
 
@@ -11,10 +6,8 @@ import Foundation
 extension LinkedList {
     // MARK: Validation
     
-    /**
-     Used for `assertValidIndex(_:for:file:line:)` function.
-     Operation is used to define the index checks.
-     */
+    ///  Used for `assertValidIndex(_:for:file:line:)` function.
+    ///  Operation is used to define the index checks.
     public enum Operation: String {
         /// Used when the check is for querying the list
         case query
@@ -24,19 +17,17 @@ extension LinkedList {
         /// and also ensures that count is not zero.
         case remove
     }
-    
-    /**
-     Used to assert that the index passed into a function is valid.
-     The operation type is required to determine if the index passed
-     is a valid index for the operation type.
-     
-     Generally speaking, an insert index can be `count`, while query
-     and removal must be `count - 1`
-     - Parameters:
-        - index: The index that needs to be checked for validity
-        - operation: The operation type we are checking. Default: `query`
-     - Warning: A `fatalError` will occure if the index is out of bounds.
-     */
+        
+    /// Used to assert that the index passed into a function is valid.
+    /// The operation type is required to determine if the index passed
+    /// is a valid index for the operation type.
+    ///
+    /// Generally speaking, an insert index can be `count`, while query
+    /// and removal must be `count - 1`
+    /// - Warning: A `fatalError` will occure if the index is out of bounds.
+    /// - Parameters:
+    ///   - index: The index that needs to be checked for validity
+    ///   - operation: The operation type we are checking. Default: `query`
     public func assertValidIndex(
         _ index: Index, for operation: Operation = .query,
         file: StaticString = #file, line: UInt = #line
